@@ -2,3 +2,5 @@
 *.pyc
 # Temporary files
 *.swp
+
+migrations
