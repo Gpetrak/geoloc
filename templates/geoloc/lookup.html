@@ -1,0 +1,31 @@
+{% extends "geoloc/geoloc_base.html" %}
+
+{% block content %}
+    <form role="form" action="/geoloc/" method="post">{% csrf_token %}
+        <div class="form-group">
+            <label for="latitude">Latitude:</label>
+            <input id="id_latitude" name="latitude" type="text" class="form-control"></input>
+        </div>
+
+        <div class="form-group">
+            <label for="longitude">Longitude:</label>
+            <input id="id_longitude" name="longitude" type="text" class="form-control"></input>
+        </div>
+
+        <div class="form-group">
+            <label for="distance">Distance (Km):</label>
+            <input id="id_distance" name="distance" type="text" class="form-control"></input>
+        </div>
+
+        <input class="btn btn-primary" type="submit" value="Submit" />
+    </form>
+    
+    <script language="javascript" type="text/javascript">
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var lat = document.getElementById('id_latitude');
+            var lon = document.getElementById('id_longitude');
+            lat.value = position.coords.latitude;
+            lon.value = position.coords.longitude;
+        });
+    </script>
+{% endblock %}
