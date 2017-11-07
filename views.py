@@ -33,9 +33,9 @@ class LookupView(FormView):
 
         # find the roads in a distance of 40 km from my location
         roads = OdikoDiktyoKritis.objects.filter(geom__distance_lte=(location, D(km=distance)))
-   
-        roads_json = serialize('geojson', roads, 
-                   fields=('geom',))
+        
+        # convert data into geojson format 
+        roads_json = roads.mpoly.geojson
         
         # remove crs key from geojson object because it is not recommended
         # and it raises invalid geojson object
