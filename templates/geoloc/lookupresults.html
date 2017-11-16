@@ -4,14 +4,14 @@
     {% leaflet_js %}
     {% leaflet_css %}
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="{{ STATIC_URL }}/lib/js/L.TileLayer.BetterWMS.js"></script>
+    <script src="{{ STATIC_URL }}lib/js/L.TileLayer.BetterWMS.js"></script>
 
     {% leaflet_map "mapid" %}
    <script>
 
   //    var geojsonFeature = {{ new_roads_json|safe }};
    
-      var road = {{ road }}   
+      var roads = {{ roads | safe }};   
       var longitude = {{ longitude }};
       var latitude = {{ latitude }};   
 
