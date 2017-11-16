@@ -9,8 +9,9 @@
     {% leaflet_map "mapid" %}
    <script>
 
-      var geojsonFeature = {{ new_roads_json|safe }};
-      
+  //    var geojsonFeature = {{ new_roads_json|safe }};
+   
+      var road = {{ road }}   
       var longitude = {{ longitude }};
       var latitude = {{ latitude }};   
 
@@ -29,19 +30,19 @@
                         'Imagery © <a href="http://mapbox.com">Mapbox</a>',
                 id: 'mapbox.streets'
         }).addTo(mymap);
+   
+    //d  var url = 'http://localhost:8080/geoserver/wms'; 
     
-      var url = 'http://localhost:8080/geoserver/wms'; 
-    
-      L.tileLayer.betterWms(url, {
-        layers: 'geonode_dev:odiko_diktyo_kritis',
-        transparent: true,
-        format: 'image/png'
-      }).addTo(mymap); 
+    //  L.tileLayer.betterWms(url, {
+    //    layers: 'geonode_dev:odiko_diktyo_kritis',
+    //    transparent: true,
+    //    format: 'image/png'
+    //  }).addTo(mymap); 
 
  
-      L.geoJSON(geojsonFeature, {
-                style: roads_style
-              }).addTo(mymap);
+     // L.geoJSON(geojsonFeature, {
+     //           style: roads_style
+     //         }).addTo(mymap);
 
      // add a marker on the location of the user
       var marker = L.marker([latitude, longitude]).addTo(mymap);

@@ -2,8 +2,10 @@ from django.shortcuts import render_to_response
 from django.views.generic.edit import FormView
 from geonode.geoloc.forms import LookupForm
 from geonode.geoloc.models import OdikoDiktyoKritis
+from geonode.geoloc.models import Natura
 from geonode.geoloc.models import Loc
 from django.contrib.gis.geos import Point
+from django.contrib.gis.geos.geometry import GEOSGeometry
 from django.contrib.gis.measure import D # 'D' is a shortcut for 'Distance'
 from django.template import RequestContext
 from django.core.serializers import serialize
@@ -31,21 +33,12 @@ class LookupView(FormView):
         location = Point(longitude, latitude, srid=4326)
 
 
-        # find the roads in a distance of 40 km from my location
-        roads = OdikoDiktyoKritis.objects.filter(geom__distance_lte=(location, D(km=distance)))
+        # query to see if a point is in our out from a natura region
+        roads = Natura.objects.filter(geom__contains=location)
         
-        # convert data into geojson format 
-        roads_json = roads.mpoly.geojson
-        
-        # remove crs key from geojson object because it is not recommended
-        # and it raises invalid geojson object
-        new_roads_json = json.loads(roads_json)
-        new_roads_json.pop('crs', None)
-        new_roads_json = json.dumps(new_roads_json)
-     
         # Render the template
         return self.render_to_response({
-                                  'new_roads_json': new_roads_json,
+                                  'roads': roads,
                                   'longitude': longitude,
                                   'latitude': latitude
                                  })

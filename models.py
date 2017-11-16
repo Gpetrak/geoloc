@@ -50,26 +50,30 @@ class OdikoDiktyoKritis(models.Model):
     def __unicode__(self):
         return self.namegrk or u''
 
-
-'''class Trans_network(models.Model):
-    objectid = models.IntegerField()
-    typeid = models.FloatField()
-    namegrk = models.CharField(max_length=200)
-    nameeng = models.CharField(max_length=200)
-    length = models.FloatField()
-    armodiot = models.CharField(max_length=200)
-    arth_num = models.CharField(max_length=200)
-    other_name = models.CharField(max_length=200)
-
-    lstring = models.MultiLineStringField()
+class Natura(models.Model):
+    gid = models.IntegerField(primary_key=True)
+    objectid = models.FloatField(blank=True, null=True)
+    code = models.CharField(max_length=50, blank=True)
+    area = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+    perimeter = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+    hectares = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+    sitetype = models.CharField(max_length=6, blank=True)
+    periphery = models.CharField(max_length=48, blank=True)
+    prefecture = models.CharField(max_length=30, blank=True)
+    name_latin = models.CharField(max_length=203, blank=True)
+    geom = models.MultiPolygonField(srid=2100, blank=True, null=True)
     objects = models.GeoManager()
+    class Meta:
+        managed = False
+        db_table = 'natura'
 
     def __str__(self):
-        return self.nameeng
-    
+        return self.name_latin
+
     def __unicode__(self):
-        return self.nameeng
-'''                            
+        return self.name_latin or u''
+
+
 class Loc(models.Model):
     name = models.CharField(max_length=200)
     location = models.PointField()
