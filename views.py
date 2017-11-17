@@ -34,11 +34,13 @@ class LookupView(FormView):
 
 
         # query to see if a point is in our out from a natura region
-        roads = Natura.objects.filter(geom__contains=location)
+        in_out = Natura.objects.filter(geom__contains=location)
+
+        result = "That point is in the %s natura region" % in_out[0]
         
         # Render the template
         return self.render_to_response({
-                                  'roads': roads,
+                                  'result': result,
                                   'longitude': longitude,
                                   'latitude': latitude
                                  })

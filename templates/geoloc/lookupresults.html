@@ -7,18 +7,16 @@
     <script src="{{ STATIC_URL }}lib/js/L.TileLayer.BetterWMS.js"></script>
 
     {% leaflet_map "mapid" %}
+    <p id="demo"></p>
    <script>
 
   //    var geojsonFeature = {{ new_roads_json|safe }};
    
-      var roads = {{ roads | safe }};   
+      var result = "{{ result | safe }}";   
       var longitude = {{ longitude }};
       var latitude = {{ latitude }};   
-
-      var roads_style = { 
-          "color": "#ff0000",
-          "weight": 3,
-          };
+    
+      document.getElementById("demo").innerHTML = result;
         
 
       var mymap = L.map('mapid').setView([35.05, 25.00], 8);
