@@ -1,6 +1,7 @@
 {% extends "geoloc/geoloc_base.html" %}
 
 {% block content %}
+    <p>Επιλέξτε μία από τις παρακάτω επιφάνειες και ελέγξτε αν η τοποθεσία που σας ενδιαφέρει βρίσκεται εντός ή εκτός των περιοχών που αντιπροσωπεύουν</p>
     <form role="form" action="/geoloc/" method="post">{% csrf_token %}
         <div class="form-group">
             <label for="latitude">Latitude:</label>
@@ -10,11 +11,6 @@
         <div class="form-group">
             <label for="longitude">Longitude:</label>
             <input id="id_longitude" name="longitude" type="text" class="form-control"></input>
-        </div>
-
-        <div class="form-group">
-            <label for="distance">Distance (Km):</label>
-            <input id="id_distance" name="distance" type="text" class="form-control"></input>
         </div>
 
         <input class="btn btn-primary" type="submit" value="Submit" />

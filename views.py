@@ -26,8 +26,6 @@ class LookupView(FormView):
         latitude = form.cleaned_data['latitude']
         longitude = form.cleaned_data['longitude']
  
-        # Get distance
-        distance = form.cleaned_data['distance'] 
 
         # Get Point
         location = Point(longitude, latitude, srid=4326)
@@ -35,8 +33,12 @@ class LookupView(FormView):
 
         # query to see if a point is in our out from a natura region
         in_out = Natura.objects.filter(geom__contains=location)
-
-        result = "That point is in the %s natura region" % in_out[0]
+       
+        # check if in_out list is empty
+        if not in_out:
+            result = "Your location is out of a Natura region"
+        else:
+            result = "Your location is in Natura region: %s" % in_out[0]
         
         # Render the template
         return self.render_to_response({
