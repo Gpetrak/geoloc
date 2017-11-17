@@ -16,7 +16,6 @@ class LookupView(FormView):
     # template that is rendered when the form is valid
     template_name = 'geoloc/lookupresults.html'
     form_class = LookupForm
-    # success_url = '/gigs/'
     
     def get(self, request): 
         return render_to_response('geoloc/lookup.html', RequestContext(request))
@@ -25,22 +24,24 @@ class LookupView(FormView):
         # Get data
         latitude = form.cleaned_data['latitude']
         longitude = form.cleaned_data['longitude']
+        # Get the model for the query
         layer = form.cleaned_data['layer']
  
 
         # Get Point
         location = Point(longitude, latitude, srid=4326)
 
-        # check if in_out list is empty
-        def inform_user(data, x): 
-            if not x:
+        # check if the list of regions is empty
+        def inform_user(data, regions): 
+            if not regions:
                 result = "Your location is out of a %s region" % data
             else:
-                result = "Your location is in %s region: %s" % (data, x[0])
+                result = "Your location is in %s region: %s" % (data, regions[0])
             return result
 
         if layer == 'natura':
-            # query to see if a point is in our out from a natura region
+            # Database query to detect if the location 
+            # is in a regions of the models' regions 
             in_out = Natura.objects.filter(geom__contains=location)
             result = inform_user(layer, in_out)
         if layer == 'oikismoi':

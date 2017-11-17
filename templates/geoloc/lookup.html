@@ -14,9 +14,24 @@
         </div>
 
         <div class="form-group">
-            <label for="layer">Select a layer:</label>
-            <input id="id_layer" name="layer" type="text" class="form-control"></input>
+          <label for="layer">Select a layer:</label>
+          <select id="dropdown">
+            <option value="">None</option>
+            <option value="natura">Natura</option>
+            <option value="oikismoi">Oikismoi</option>
+          </select>
+          <input id="id_layer" name="layer" type="text" class="form-control"></input>
+        <script type="text/javascript">
+          // script to fill a form fild after clicking a dropdown list
+          var mymodel = document.getElementById('id_layer');
+          var mydropdown = document.getElementById('dropdown');
+          
+          mydropdown.onchange = function(){
+                mymodel.value = this.value;
+           }
+         </script>
         </div>
+        
 
 
         <input class="btn btn-primary" type="submit" value="Submit" />
