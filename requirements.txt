@@ -5,7 +5,7 @@ backports.shutil-get-terminal-size==1.0.0
 beautifulsoup4==4.4.1
 billiard==3.3.0.23
 boto==2.38.0
-celery==3.1.20
+celery==5.2.2
 -e git+https://github.com/Gpetrak/crete-gis@b024a9d01434eb9699a7df75b6f08c80249651ff#egg=crete_gis
 decorator==4.1.2
 dj-database-url==0.4.2
